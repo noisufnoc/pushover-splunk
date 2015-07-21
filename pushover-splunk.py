@@ -18,31 +18,32 @@ parser.read(CONFIG)
 
 # TODO: Formatting sucks here
 conn = httplib.HTTPSConnection("api.pushover.net:443")
-conn.request("POST", "/1/messages.json",
-               urllib.urlencode({
-                       "token": parser.get('pushover', 'token'),
-                       "user": parser.get('pushover', 'user'),
-                       "message": sys.argv[5],
-                     }), { "Content-type": "application/x-www-form-urlencoded" })
+conn.request(
+    "POST",
+    "/1/messages.json",
+    urllib.urlencode(
+        {
+            "token": parser.get('pushover', 'token'),
+            "user": parser.get('pushover', 'user'),
+            "message": sys.argv[5],
+        }
+    ),
+    {"Content-type": "application/x-www-form-urlencoded"}
+)
+
 conn.getresponse()
 
 # Splunk alert args
-
-#for arg in sys.argv:
-#    print arg
-
-#   [
-#   '/opt/splunk/pushover/bin/python',
-#   '/opt/splunk/pushover/bin/scripts/pushover-splunk.py',
-#   '345',
-#   'index=_internal',
-#   'index=_internal',
-#   'test alert',
-#   'Saved Search [test
-#       alert] number of events(345)',
-#   'http://mwalker-mbpr15.local:8000/app/search/search?q=%7Cloadjob%20scheduler__mike__search__RMD5354c629e1e04adb1_at_1437438600_1%20%7C%20head%20192%20%7C%20tail%201&earliest=0&latest=now',
-#   '',
-#   '/opt/splunk/pushover/var/run/splunk/dispatch/scheduler__mike__search__RMD5354c629e1e04adb1_at_1437438600_1/per_result_alert/tmp_191.csv.gz'
-#   ]
-
-
+#
+# Arg EnvVar          Value
+# 0   SPLUNK_ARG_0    Script name
+# 1   SPLUNK_ARG_1    Number of events returned
+# 2   SPLUNK_ARG_2    Search terms
+# 3   SPLUNK_ARG_3    Fully qualified query string
+# 4   SPLUNK_ARG_4    Name of report
+# 5   SPLUNK_ARG_5    Trigger reason
+#                     For example, "The number of events was greater than 1."
+# 6   SPLUNK_ARG_6    Browser URL to view the report.
+# 7   SPLUNK_ARG_7    Not used for historical reasons.
+# 8   SPLUNK_ARG_8    File in which the results for the search are stored.
+#                     Contains raw results.
