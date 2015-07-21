@@ -60,3 +60,4 @@ target/
 # My custom stuff
 *.swp
 .ropeproject/
+config.ini

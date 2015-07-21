@@ -1,0 +1,3 @@
+[pushover]
+token = APP_TOKEN
+user = USER_KEY
