@@ -6,6 +6,7 @@ from ConfigParser import SafeConfigParser
 CONFIG = 'config.ini'
 
 # TODO: Error checking would be glorious here
+# TODO: Probably wont use ConfigParser anyway, should use splunk cred mgmt
 parser = SafeConfigParser()
 parser.read(CONFIG)
 
