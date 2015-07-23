@@ -3,7 +3,7 @@ import httplib
 import urllib
 from ConfigParser import SafeConfigParser
 
-CONFIG = 'config.ini'
+#CONFIG = '/Users/mwalker/code/py/pushover-splunk/config.ini'
 
 # TODO: Error checking would be glorious here
 # TODO: Probably wont use ConfigParser anyway, should use splunk cred mgmt
@@ -17,7 +17,6 @@ parser.read(CONFIG)
 #   of up to 250 characters. Supplementary URLs are limited to 512 characters,
 #   and URL titles to 100 characters.
 
-# TODO: Formatting sucks here
 conn = httplib.HTTPSConnection("api.pushover.net:443")
 conn.request(
     "POST",
@@ -27,6 +26,9 @@ conn.request(
             "token": parser.get('pushover', 'token'),
             "user": parser.get('pushover', 'user'),
             "message": sys.argv[5],
+            "title": sys.argv[4],
+            "url": sys.argv[6],
+            "url_title": "View Report in Splunk"
         }
     ),
     {"Content-type": "application/x-www-form-urlencoded"}
